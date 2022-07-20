@@ -2,7 +2,7 @@
 use GDO\UI\GDT_Button;
 use GDO\UI\GDT_Menu;
 use GDO\User\GDO_User;
-use GDO\Profile\GDT_ProfileLink;
+use GDO\User\GDT_ProfileLink;
 
 $user = $follower->getOther(GDO_User::current());
 $mode = $user === $follower->getUser() ? 1 : 2;
