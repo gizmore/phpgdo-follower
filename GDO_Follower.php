@@ -25,13 +25,13 @@ final class GDO_Follower extends GDO
 	/**
 	 * @return \GDO\User\GDO_User
 	 */
-	public function getFollower() { return $this->getValue('follow_following'); }
+	public function getFollower() { return $this->gdoValue('follow_following'); }
 	public function getFollowerID() { return $this->gdoVar('follow_following'); }
 
 	/**
 	 * @return \GDO\User\GDO_User
 	 */
-	public function getUser() { return $this->getValue('follow_user'); }
+	public function getUser() { return $this->gdoValue('follow_user'); }
 	public function getUserID() { return $this->gdoVar('follow_user'); }
 	
 	/**
