@@ -20,7 +20,7 @@ final class GDO_Follower extends GDO
 		);
 	}
 	
-	public function renderList() { return GDT_Template::php('Follower', 'list/follower.php', ['follower'=>$this]); }
+	public function renderList() : string { return GDT_Template::php('Follower', 'list/follower.php', ['follower'=>$this]); }
 
 	/**
 	 * @return \GDO\User\GDO_User
