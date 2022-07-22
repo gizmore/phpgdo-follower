@@ -36,10 +36,10 @@ final class Followers extends MethodQueryList
 	public function execute()
 	{
 		$tabs = GDT_Bar::make()->horizontal();
-		$tabs->addFields(array(
+		$tabs->addFields(
 			GDT_Link::make('link_follow')->href(href('Follower', 'Follow'))->icon('add'),
 			GDT_Link::make('link_following')->href(href('Follower', 'Following'))->icon('list'),
-		));
+		);
 		return GDT_Response::makeWith($tabs, parent::execute());
 	}
 }

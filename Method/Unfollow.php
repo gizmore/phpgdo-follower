@@ -20,21 +20,21 @@ final class Unfollow extends MethodForm
 	public function renderPage() : GDT
 	{
 		$tabs = GDT_Bar::make()->horizontal();
-		$tabs->addFields(array(
+		$tabs->addFields(
 			GDT_Link::make('link_followers')->href(href('Follower', 'Followers'))->icon('list'),
 			GDT_Link::make('link_following')->href(href('Follower', 'Following'))->icon('list'),
-		));
+		);
 		return GDT_Response::makeWith($tabs)->addField(parent::renderPage());
 	}
 	
 	public function createForm(GDT_Form $form) : void
 	{
 		$follower = GDT_User::make('follower')->initial(Common::getRequestInt('id'));
-		$form->addFields(array(
+		$form->addFields(
 			$follower,
 			GDT_Validator::make()->validator($form, $follower, [$this, 'validateFollower']),
 			GDT_AntiCSRF::make(),
-		));
+		);
 		$form->actions()->addField(GDT_Submit::make());
 	}
 	
@@ -55,7 +55,7 @@ final class Unfollow extends MethodForm
 		
 		GDO_Follower::table()->deleteWhere("follow_user=$uid AND follow_following={$following->getID()}");
 		
-		return Website::redirectMessage('msg_unfollow', [$following->renderUserName()], href('Follower', 'Following'));
+		return $this->redirectMessage('msg_unfollow', [$following->renderUserName()], href('Follower', 'Following'));
 	}
 	
 }

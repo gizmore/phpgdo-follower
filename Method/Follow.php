@@ -28,10 +28,10 @@ final class Follow extends MethodForm
 	public function renderPage() : GDT
 	{
 		$tabs = GDT_Bar::make()->horizontal();
-		$tabs->addFields(array(
+		$tabs->addFields(
 			GDT_Link::make('link_followers')->href(href('Follower', 'Followers'))->icon('list'),
 			GDT_Link::make('link_following')->href(href('Follower', 'Following'))->icon('list'),
-		));
+		);
 		return GDT_Response::makeWith($tabs)->addField(parent::renderPage());
 	}
 	
@@ -39,11 +39,11 @@ final class Follow extends MethodForm
 	{
 		$follow = GDO_Follower::table();
 		$following = $follow->gdoColumn('follow_following');
-		$form->addFields(array(
+		$form->addFields(
 			$following,
 			GDT_Validator::make()->validator($form, $following, [$this, 'validateFollowing']),
 			GDT_AntiCSRF::make(),
-		));
+		);
 		$form->actions()->addField(GDT_Submit::make());
 	}
 	
@@ -84,7 +84,7 @@ final class Follow extends MethodForm
 		
 		#
 		return
-			Website::redirectMessage('msg_following', [$following->displayName()], url('Follower', 'Following'));
+			$this->redirectMessage('msg_following', [$following->displayName()], url('Follower', 'Following'));
 	}
 	
 }
