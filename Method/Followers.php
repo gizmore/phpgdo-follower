@@ -6,6 +6,7 @@ use GDO\User\GDT_User;
 use GDO\User\GDO_User;
 use GDO\UI\GDT_Bar;
 use GDO\UI\GDT_Link;
+use GDO\Core\GDO;
 use GDO\Core\GDT_Response;
 /**
  * List all followers for a user.
@@ -15,7 +16,7 @@ use GDO\Core\GDT_Response;
  */
 final class Followers extends MethodQueryList
 {
-	public function gdoTable()
+	public function gdoTable() : GDO
 	{
 		return GDO_Follower::table();
 	}

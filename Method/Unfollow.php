@@ -1,6 +1,7 @@
 <?php
 namespace GDO\Follower\Method;
 
+use GDO\Core\GDT;
 use GDO\Core\GDT_Response;
 use GDO\Form\GDT_Form;
 use GDO\Form\MethodForm;
@@ -13,7 +14,6 @@ use GDO\Form\GDT_Submit;
 use GDO\Form\GDT_AntiCSRF;
 use GDO\Follower\GDO_Follower;
 use GDO\User\GDO_User;
-use GDO\Core\Website;
 
 final class Unfollow extends MethodForm
 {

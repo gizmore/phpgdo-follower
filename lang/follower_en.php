@@ -7,7 +7,7 @@ return array(
 'link_followers' => 'Followers',
 'link_following' => 'Following',
 ### Follow
-'ft_follower_follow' => '[%s] Follow a user',
+'mt_follower_follow' => '[%s] Follow a user',
 'err_follow_self' => 'You cannot follow yourself.',
 'err_follow_already' => 'You already follow %s.',
 'msg_following' => 'You are now following %s.',
@@ -16,6 +16,6 @@ return array(
 ### Following
 'list_following' => '[%s] Following',
 ### Unfollow
-'ft_follower_unfollow' => '[%s] Stop following a user',
+'mt_follower_unfollow' => '[%s] Stop following a user',
 'msg_unfollow' => 'You stopped to follow %s.',
 );
