@@ -11,7 +11,7 @@ echo $follower->getOther(GDO_User::current())->renderUserName();
 ?>
 <div class="gdt-list-item">
   <div>
-    <?=GDT_ProfileLink::make()->forUser($user)->nickname()->render()?>
+    <?=GDT_ProfileLink::make()->user($user)->nickname()->render()?>
   </div>
   <div class="gdt-content">
     Follows you since may
