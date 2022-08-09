@@ -8,6 +8,7 @@ use GDO\UI\GDT_Bar;
 use GDO\UI\GDT_Link;
 use GDO\Core\GDO;
 use GDO\Core\GDT_Response;
+use GDO\DB\Query;
 /**
  * List all users a user is following.
  *
@@ -28,7 +29,7 @@ final class Following extends MethodQueryList
 		);
 	}
 	
-	public function getQuery()
+	public function getQuery() : Query
 	{
 		$uid = $this->gdoParameter('id')->getParameterValue()->getID();
 		return GDO_Follower::table()->select('*')->where("follow_user=$uid");
