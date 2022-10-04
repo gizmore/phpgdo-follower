@@ -83,7 +83,7 @@ final class Follow extends MethodForm
 		
 		#
 		return
-			$this->redirectMessage('msg_following', [$following->displayName()], url('Follower', 'Following'));
+			$this->redirectMessage('msg_following', [$following->renderName()], url('Follower', 'Following'));
 	}
 	
 }
