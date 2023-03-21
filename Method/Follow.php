@@ -1,30 +1,31 @@
 <?php
 namespace GDO\Follower\Method;
 
-use GDO\Form\GDT_Form;
-use GDO\Form\MethodForm;
+use GDO\Core\GDT;
+use GDO\Core\GDT_Hook;
+use GDO\Core\GDT_Response;
 use GDO\Follower\GDO_Follower;
-use GDO\Form\GDT_Submit;
 use GDO\Form\GDT_AntiCSRF;
+use GDO\Form\GDT_Form;
+use GDO\Form\GDT_Submit;
+use GDO\Form\GDT_Validator;
+use GDO\Form\MethodForm;
 use GDO\UI\GDT_Bar;
 use GDO\UI\GDT_Link;
 use GDO\User\GDO_User;
 use GDO\User\GDT_User;
-use GDO\Core\GDT;
-use GDO\Core\GDT_Hook;
-use GDO\Core\GDT_Response;
-use GDO\Form\GDT_Validator;
 
 /**
  * Add a user to follow.
- * 
- * @author gizmore
+ *
  * @version 6.10
  * @since 6.07
+ * @author gizmore
  */
 final class Follow extends MethodForm
 {
-	public function renderPage() : GDT
+
+	public function renderPage(): GDT
 	{
 		$tabs = GDT_Bar::make()->horizontal();
 		$tabs->addFields(
@@ -33,8 +34,8 @@ final class Follow extends MethodForm
 		);
 		return GDT_Response::makeWith($tabs)->addField(parent::renderPage());
 	}
-	
-	public function createForm(GDT_Form $form) : void
+
+	public function createForm(GDT_Form $form): void
 	{
 		$follow = GDO_Follower::table();
 		$following = $follow->gdoColumn('follow_following');
@@ -45,7 +46,30 @@ final class Follow extends MethodForm
 		);
 		$form->actions()->addField(GDT_Submit::make());
 	}
-	
+
+	public function formValidated(GDT_Form $form)
+	{
+		# User which follows
+		$userid = GDO_User::current()->getID();
+
+		/**
+		 * @var GDO_User $following
+		 */
+		$following = $form->getFormValue('follow_following');
+
+		# Insert record
+		GDO_Follower::blank($form->getFormVars())->
+		setVar('follow_user', $userid)->
+		insert();
+
+		#
+		GDT_Hook::call('FollowerFollow', $userid, $following->getID());
+
+		#
+		return
+			$this->redirectMessage('msg_following', [$following->renderName()], url('Follower', 'Following'));
+	}
+
 	public function validateFollowing(GDT_Form $form, GDT_User $field, $value)
 	{
 		if ($user = $field->getValue())
@@ -62,28 +86,5 @@ final class Follow extends MethodForm
 		}
 		return true;
 	}
-	
-	public function formValidated(GDT_Form $form)
-	{
-		# User which follows
-		$userid = GDO_User::current()->getID();
 
-		/**
-		 * @var GDO_User $following
-		 */
-		$following = $form->getFormValue('follow_following');
-		
-		# Insert record
-		GDO_Follower::blank($form->getFormVars())->
-			setVar('follow_user', $userid)->
-			insert();
-		
-		# 
-		GDT_Hook::call('FollowerFollow', $userid, $following->getID());
-		
-		#
-		return
-			$this->redirectMessage('msg_following', [$following->renderName()], url('Follower', 'Following'));
-	}
-	
 }
