@@ -2,6 +2,7 @@
 namespace GDO\Follower\Method;
 
 use GDO\Core\GDO;
+use GDO\Core\GDT;
 use GDO\Core\GDT_Response;
 use GDO\DB\Query;
 use GDO\Follower\GDO_Follower;
@@ -38,7 +39,7 @@ final class Followers extends MethodQueryList
 		return GDO_Follower::table()->select('*')->where("follow_following=$uid");
 	}
 
-	public function execute()
+	public function execute(): GDT
 	{
 		$tabs = GDT_Bar::make()->horizontal();
 		$tabs->addFields(

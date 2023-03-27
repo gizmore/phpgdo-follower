@@ -39,7 +39,7 @@ final class Unfollow extends MethodForm
 		$form->actions()->addField(GDT_Submit::make());
 	}
 
-	public function formValidated(GDT_Form $form)
+	public function formValidated(GDT_Form $form): GDT
 	{
 		$uid = GDO_User::current()->getID();
 		$following = $form->getFormValue('follower');

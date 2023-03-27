@@ -47,7 +47,7 @@ final class Follow extends MethodForm
 		$form->actions()->addField(GDT_Submit::make());
 	}
 
-	public function formValidated(GDT_Form $form)
+	public function formValidated(GDT_Form $form): GDT
 	{
 		# User which follows
 		$userid = GDO_User::current()->getID();
@@ -63,7 +63,7 @@ final class Follow extends MethodForm
 		insert();
 
 		#
-		GDT_Hook::call('FollowerFollow', $userid, $following->getID());
+		GDT_Hook::callWithIPC('FollowerFollow', $userid, $following->getID());
 
 		#
 		return
