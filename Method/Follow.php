@@ -79,7 +79,7 @@ final class Follow extends MethodForm
 				return $field->error('err_follow_self');
 			}
 			$uid = GDO_User::current()->getID();
-			if ('1' === GDO_Follower::table()->select('1')->where("follow_user=$uid AND follow_following={$user->getID()}")->exec()->fetchValue())
+			if ('1' === GDO_Follower::table()->select('1')->where("follow_user=$uid AND follow_following={$user->getID()}")->exec()->fetchVar())
 			{
 				return $field->error('err_follow_already', [$user->renderUserName()]);
 			}
