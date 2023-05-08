@@ -28,7 +28,7 @@ final class Unfollow extends MethodForm
 		return GDT_Response::makeWith($tabs)->addField(parent::renderPage());
 	}
 
-	public function createForm(GDT_Form $form): void
+	protected function createForm(GDT_Form $form): void
 	{
 		$follower = GDT_User::make('follower')->initial(Common::getRequestInt('id'));
 		$form->addFields(

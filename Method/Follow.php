@@ -35,7 +35,7 @@ final class Follow extends MethodForm
 		return GDT_Response::makeWith($tabs)->addField(parent::renderPage());
 	}
 
-	public function createForm(GDT_Form $form): void
+	protected function createForm(GDT_Form $form): void
 	{
 		$follow = GDO_Follower::table();
 		$following = $follow->gdoColumn('follow_following');
