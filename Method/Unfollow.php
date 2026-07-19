@@ -30,7 +30,7 @@ final class Unfollow extends MethodForm
 
 	protected function createForm(GDT_Form $form): void
 	{
-		$follower = GDT_User::make('follower')->initial(Common::getRequestInt('id'));
+		$follower = GDT_User::make('follower')->initial($this->getInputFor('id'));
 		$form->addFields(
 			$follower,
 			GDT_Validator::make()->validator($form, $follower, [$this, 'validateFollower']),
